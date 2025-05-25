@@ -29,7 +29,7 @@ const MenuStack = () => {
       <BottomTab.Screen
         name="maps"
         component={Map}
-        options={{ tabBarLabel: "Shop", icon: "map-outline" }}
+        options={{ tabBarLabel: "Maps", icon: "map-outline" }}
       />
       <BottomTab.Screen
         name="profile"
