@@ -1,15 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import TabBar from "./src/components/tab-bar/tab-bar.component";
 import Home from "./src/screens/Home/home.component";
-import Map from "./src/screens/Search/SearchPage.style";
-import Profile from "./src/screens/Profile/profile.component";
 import { NavigationContainer } from "@react-navigation/native";
-import * as SplashScreen from "expo-splash-screen";
 import RoomDetail from "./src/screens/DetailRoom/DetailRoom.component";
 import SearchScreen from "./src/screens/Search/SearchPage.component";
+import SearchDetail from "./src/screens/SearchDetail/SearchDetail.component";
+import AccountScreen from "./src/screens/Account/Account.component";
+import MessageScreen from "./src/screens/Message/Message.component";
+import DetailMessageScreen from "./src/screens/MessageDetail/MessageDetail.component";
 //
 
 const Stack = createStackNavigator();
@@ -35,17 +35,34 @@ const MenuStack = () => {
       />
       <BottomTab.Screen
         name="search"
-        component={SearchScreen}
+        component={SearchStackScreen}
         options={{ tabBarLabel: "Search", icon: "search-outline" }}
       />
       <BottomTab.Screen
-        name="profile"
-        component={Profile}
-        options={{ tabBarLabel: "Profile", icon: "settings-outline" }}
+        name="message"
+        component={MessageStack}
+        options={{ tabBarLabel: "message", icon: "chatbox-outline" }}
+      />
+      <BottomTab.Screen
+        name="account"
+        component={AccountScreen}
+        options={{ tabBarLabel: "Account", icon: "person-outline" }}
       />
     </BottomTab.Navigator>
   );
 };
+
+const SearchStackScreen = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="SearchPage" component={SearchScreen} />
+    <Stack.Screen name="SearchDetail" component={SearchDetail} />
+  </Stack.Navigator>
+);
+const MessageStack = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="MessageScreen" component={MessageScreen} />
+  </Stack.Navigator>
+);
 
 const App = () => (
   <NavigationContainer>
@@ -53,16 +70,11 @@ const App = () => (
       <Stack.Screen name="MenuStack" component={MenuStack} />
       <Stack.Screen name="HomeStack" component={HomeStack} />
       <Stack.Screen name="RoomDetail" component={RoomDetail} />
+      <Stack.Screen name="MessageDetail" component={DetailMessageScreen} />
+
+      {/* <Stack.Screen name="SearchDetail" component={SearchDetail} /> */}
     </Stack.Navigator>
     <StatusBar style="auto" />
   </NavigationContainer>
 );
 export default App;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

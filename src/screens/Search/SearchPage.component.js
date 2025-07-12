@@ -11,6 +11,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "./SearchPage.style";
 import PrimaryButton from "../../components/primary-button/primary-button.component";
+import { useNavigation } from "@react-navigation/native";
 
 const locations = [
   {
@@ -44,6 +45,7 @@ const locations = [
 ];
 
 const SearchScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -79,7 +81,12 @@ const SearchScreen = () => {
             placeholderTextColor="#888"
           />
         </View>
-        <PrimaryButton style={styles.searchBtn}>Search Now</PrimaryButton>
+        <PrimaryButton
+          style={styles.searchBtn}
+          onPress={() => navigation.navigate("SearchDetail")}
+        >
+          Search Now
+        </PrimaryButton>
       </View>
 
       {/* Locations */}
